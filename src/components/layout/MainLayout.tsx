@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { MarketplaceProvider } from "@/lib/context/useMarketplace";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
