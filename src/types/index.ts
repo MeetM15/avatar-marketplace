@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export enum Categories {
   Avatars = "Avatars",
   Fashion = "Fashion",
@@ -72,8 +74,15 @@ export type MarketplaceContextType = {
   generateProductsList: (
     category: Category,
     subcategory: Subcategory | undefined,
-    searchQuery: string
+    searchQuery: string,
+    priceRange: number[]
   ) => Product[];
+  showFilters: boolean;
+  setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  priceRange: number[];
+  setPriceRange: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedPlatforms: PlatformType[];
+  setSelectedPlatforms: React.Dispatch<React.SetStateAction<PlatformType[]>>;
 };
 
 // Enum for Platform Types
@@ -94,4 +103,7 @@ export type Platform = {
   id: PlatformType; // Unique identifier for the platform
   label: string; // Display name for the platform
   image?: string; // Image URL for the platform
+  imageHeight: number; // Height of the image
+  imageWidth: number; // Width of the image
+  imageStyle?: CSSProperties | undefined; // Additional classes for the image
 };

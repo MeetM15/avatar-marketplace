@@ -3,6 +3,7 @@ import {
   Categories,
   Category,
   MarketplaceContextType,
+  PlatformType,
   Product,
   Subcategory,
 } from "@/types";
@@ -27,11 +28,17 @@ export const MarketplaceProvider = ({
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [productsList, setProductsList] = useState<Product[]>(productsData);
+  const [showFilters, setShowFilters] = useState(false);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState<PlatformType[]>(
+    []
+  );
 
   const generateProductsList = (
     category: Category,
     subcategory: Subcategory | undefined,
-    searchQuery: string
+    searchQuery: string,
+    priceRange: number[] = [0, 1000]
   ) => {
     const filteredProducts = productsData.filter((product) => {
       const categoryMatch =
@@ -47,7 +54,10 @@ export const MarketplaceProvider = ({
         ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
         : true;
 
-      return categoryMatch && subcategoryMatch && searchMatch;
+      const priceMatch =
+        product.price >= priceRange[0] && product.price <= priceRange[1];
+
+      return categoryMatch && subcategoryMatch && searchMatch && priceMatch;
     });
     return filteredProducts;
   };
@@ -56,7 +66,8 @@ export const MarketplaceProvider = ({
     const newProductsList = generateProductsList(
       selectedCategory,
       selectedSubCategory || undefined,
-      searchQuery
+      searchQuery,
+      priceRange
     );
     setProductsList(newProductsList);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,6 +93,12 @@ export const MarketplaceProvider = ({
         productsList,
         setProductsList,
         generateProductsList,
+        showFilters,
+        setShowFilters,
+        priceRange,
+        setPriceRange,
+        selectedPlatforms,
+        setSelectedPlatforms,
       }}>
       {children}
     </MarketplaceContext.Provider>
