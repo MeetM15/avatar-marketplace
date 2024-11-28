@@ -10,6 +10,9 @@ import {
 import { FiGlobe } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useMarketplace } from "@/lib/context/useMarketplace";
+import { languagesData } from "@/data/languages";
+import Image from "next/image";
+import { Separator } from "../ui/separator";
 
 const UserSection = () => {
   const {
@@ -37,7 +40,21 @@ const UserSection = () => {
             <FiGlobe className="!w-5 !h-5" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-80">Language List</PopoverContent>
+        <PopoverContent className="w-[203px] rounded-lg p-1.5 bg-background-2">
+          {languagesData.map((language, index) => (
+            <Button
+              key={index}
+              className="flex items-center gap-2.5 px-1.5 bg-transparent hover:bg-background-3 shadow-none w-full justify-start">
+              <Image
+                src={language.image}
+                alt={language.name}
+                width={17}
+                height={12}
+              />
+              {language.name}
+            </Button>
+          ))}
+        </PopoverContent>
       </Popover>
       <Popover
         open={isProfileDropdownOpen}
@@ -56,7 +73,21 @@ const UserSection = () => {
             </div>
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-80">Profile Data</PopoverContent>
+        <PopoverContent className="w-[220px] rounded-xl py-2.5 px-0 bg-background-2">
+          <Button className="flex items-center bg-transparent hover:bg-background-3 shadow-none w-full text-dark-secondary justify-start text-sm px-2 rounded-none">
+            Sign in
+          </Button>
+          <Button className="flex items-center bg-transparent hover:bg-background-3 shadow-none w-full text-dark-secondary justify-start text-sm px-2 rounded-none">
+            Sign up
+          </Button>
+          <Separator className="w-full m-2 bg-light-gray" />
+          <Button className="flex items-center bg-transparent hover:bg-background-3 shadow-none w-full text-dark-secondary justify-start text-sm px-2 rounded-none">
+            List your item
+          </Button>
+          <Button className="flex items-center bg-transparent hover:bg-background-3 shadow-none w-full text-dark-secondary justify-start text-sm px-2 rounded-none">
+            Message to Yuta(The founder)
+          </Button>
+        </PopoverContent>
       </Popover>
       <Button
         variant="outline"
