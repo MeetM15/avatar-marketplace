@@ -91,6 +91,8 @@ export type MarketplaceContextType = {
   setCurrentScreen: React.Dispatch<React.SetStateAction<ScreenSize>>;
   showMobileMenu: boolean;
   setShowMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  showAllParentCategories: boolean;
+  setShowAllParentCategories: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // Enum for Platform Types

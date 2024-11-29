@@ -30,6 +30,9 @@ const SearchAndCategory = () => {
     setProductsList,
     priceRange,
     isBottomNavVisible,
+    currentScreen,
+    showAllParentCategories,
+    setShowAllParentCategories,
   } = useMarketplace();
   return (
     <div className="bg-background-2 rounded-full h-full flex items-center">
@@ -83,23 +86,36 @@ const SearchAndCategory = () => {
             </Button>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[444px] h-[352px] rounded-[32px] p-4 bg-background-3"
+            className={`md:w-[444px] h-max md:h-[352px] rounded-[32px] p-4 bg-background-3 ${
+              selectedCategory?.subcategories &&
+              selectedCategory.subcategories.length > 0
+                ? "w-[256px]"
+                : "w-[232px]"
+            }`}
             align="end"
             alignOffset={-52}
             sideOffset={16}>
-            <div className="flex gap-1.5">
+            <div className="flex flex-col md:flex-row gap-1.5">
               <div className="h-full">
                 {categoryData.map((cat) => {
                   return (
                     <Button
                       key={cat.value}
-                      className={`w-[200px] h-10 flex items-center justify-between rounded-full bg-transparent hover:bg-background-4 shadow-none ${
+                      className={`w-[200px] h-10 items-center justify-between rounded-full bg-transparent hover:bg-background-4 shadow-none ${
                         selectedCategory.value === cat.value
                           ? "bg-background-4"
                           : ""
+                      } ${
+                        selectedCategory.value === cat.value ||
+                        showAllParentCategories
+                          ? "flex"
+                          : "hidden md:flex"
                       }`}
                       onClick={() => {
                         setSelectedCategory(cat);
+                        if (cat?.subcategories?.length) {
+                          setShowAllParentCategories((prev) => !prev);
+                        }
                         setSelectedSubCategory(undefined);
                       }}>
                       <span className="font-normal">{cat.value}</span>
@@ -110,10 +126,18 @@ const SearchAndCategory = () => {
                   );
                 })}
               </div>
-              <Separator orientation="vertical" className="bg-light-gray" />
               {selectedCategory?.subcategories &&
                 selectedCategory.subcategories.length > 0 && (
-                  <div className="h-full">
+                  <Separator
+                    orientation={
+                      currentScreen === "mobile" ? "horizontal" : "vertical"
+                    }
+                    className="bg-light-gray"
+                  />
+                )}
+              {selectedCategory?.subcategories &&
+                selectedCategory.subcategories.length > 0 && (
+                  <div className="h-full pl-6 md:pl-0">
                     {selectedCategory.subcategories.map((subCat) => {
                       return (
                         <Button

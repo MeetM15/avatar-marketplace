@@ -38,7 +38,7 @@ export const MarketplaceProvider = ({
   const [lastScrollY, setLastScrollY] = useState(0);
   const [currentScreen, setCurrentScreen] = useState<ScreenSize>("desktop");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
+  const [showAllParentCategories, setShowAllParentCategories] = useState(true);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -147,6 +147,8 @@ export const MarketplaceProvider = ({
         setCurrentScreen,
         showMobileMenu,
         setShowMobileMenu,
+        showAllParentCategories,
+        setShowAllParentCategories,
       }}>
       {children}
     </MarketplaceContext.Provider>
