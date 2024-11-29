@@ -1,3 +1,4 @@
+import { LanguageValue } from "@/data/languages";
 import { CSSProperties } from "react";
 
 export enum Categories {
@@ -93,6 +94,8 @@ export type MarketplaceContextType = {
   setShowMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
   showAllParentCategories: boolean;
   setShowAllParentCategories: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedLanguage: LanguageValue;
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<LanguageValue>>;
 };
 
 // Enum for Platform Types

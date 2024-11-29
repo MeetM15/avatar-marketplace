@@ -10,6 +10,7 @@ import {
 } from "@/types";
 import { defaultCategory } from "@/data/categories";
 import { productsData } from "@/data/products";
+import { LanguageValue } from "@/data/languages";
 const MarketplaceContext = createContext<MarketplaceContextType>(
   {} as MarketplaceContextType
 );
@@ -39,6 +40,8 @@ export const MarketplaceProvider = ({
   const [currentScreen, setCurrentScreen] = useState<ScreenSize>("desktop");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAllParentCategories, setShowAllParentCategories] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] =
+    useState<LanguageValue>("en-US");
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -149,6 +152,8 @@ export const MarketplaceProvider = ({
         setShowMobileMenu,
         showAllParentCategories,
         setShowAllParentCategories,
+        selectedLanguage,
+        setSelectedLanguage,
       }}>
       {children}
     </MarketplaceContext.Provider>

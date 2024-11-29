@@ -6,13 +6,11 @@ import SearchAndCategory from "../Navbar/SearchAndCategory";
 import UserSection from "../Navbar/UserSection";
 import ProductFilters from "../Navbar/ProductFilters";
 import { useMarketplace } from "@/lib/context/useMarketplace";
-import { IoMenu } from "react-icons/io5";
-import { Button } from "../ui/button";
+import MobileSidebar from "../Navbar/MobileSidebar";
 
 const Navbar = () => {
   const router = useRouter();
-  const { currentScreen, isBottomNavVisible, setShowMobileMenu } =
-    useMarketplace();
+  const { currentScreen, isBottomNavVisible } = useMarketplace();
 
   return (
     <>
@@ -56,17 +54,7 @@ const Navbar = () => {
             </div>
           </>
         )}
-        {currentScreen === "mobile" ? (
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full bg-transparent hover:bg-background-3 text-dark-secondary hover:text-dark-secondary w-10 h-10 border-dark-secondary"
-            onClick={() => setShowMobileMenu((prev) => !prev)}>
-            <IoMenu className="!w-6 !h-6" />
-          </Button>
-        ) : (
-          <UserSection />
-        )}
+        {currentScreen === "mobile" ? <MobileSidebar /> : <UserSection />}
       </nav>
       {currentScreen === "tablet" && (
         <nav

@@ -20,6 +20,8 @@ const UserSection = () => {
     setIsLanguageDropdownOpen,
     isProfileDropdownOpen,
     setIsProfileDropdownOpen,
+    selectedLanguage,
+    setSelectedLanguage,
   } = useMarketplace();
   return (
     <div className="flex items-center gap-6 h-12">
@@ -39,7 +41,13 @@ const UserSection = () => {
           {languagesData.map((language, index) => (
             <Button
               key={index}
-              className="flex items-center gap-2.5 px-1.5 bg-transparent hover:bg-background-3 shadow-none w-full justify-start">
+              className={`flex items-center gap-2.5 px-1.5 bg-transparent hover:bg-background-3 shadow-none w-full justify-start  ${
+                selectedLanguage === language.value ? "bg-background-4" : ""
+              }`}
+              onClick={() => {
+                setSelectedLanguage(language.value);
+                setIsLanguageDropdownOpen(false);
+              }}>
               <Image
                 src={language.image}
                 alt={language.name}
