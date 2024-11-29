@@ -107,3 +107,5 @@ export type Platform = {
   imageWidth: number; // Width of the image
   imageStyle?: CSSProperties | undefined; // Additional classes for the image
 };
+
+export type ScreenSize = "mobile" | "tablet" | "desktop";

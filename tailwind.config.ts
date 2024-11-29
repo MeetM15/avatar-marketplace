@@ -9,24 +9,34 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "#110606",
-        foreground: "#ffffff",
-        "background-2": "#2B2828",
-        "background-3": "#443E3E",
-        "background-4": "#655D5E",
-        "light-gray": "#515151",
-        "main-primary": "#CA323D",
-        "dark-gray": "#B3B3B3",
-        "dark-secondary": "#F1F1F1",
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
-    },
+  	extend: {
+  		colors: {
+  			background: '#110606',
+  			foreground: '#ffffff',
+  			'background-2': '#2B2828',
+  			'background-3': '#443E3E',
+  			'background-4': '#655D5E',
+  			'light-gray': '#515151',
+  			'main-primary': '#CA323D',
+  			'dark-gray': '#B3B3B3',
+  			'dark-secondary': '#F1F1F1',
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
+  			}
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
+  		}
+  	}
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
