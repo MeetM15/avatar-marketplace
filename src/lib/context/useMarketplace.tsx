@@ -5,6 +5,7 @@ import {
   MarketplaceContextType,
   PlatformType,
   Product,
+  ScreenSize,
   Subcategory,
 } from "@/types";
 import { defaultCategory } from "@/data/categories";
@@ -33,6 +34,45 @@ export const MarketplaceProvider = ({
   const [selectedPlatforms, setSelectedPlatforms] = useState<PlatformType[]>(
     []
   );
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [currentScreen, setCurrentScreen] = useState<ScreenSize>("desktop");
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY === 0) {
+        setIsBottomNavVisible(true);
+      } else {
+        setIsBottomNavVisible(false);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setCurrentScreen("desktop");
+      } else if (window.innerWidth >= 768) {
+        setCurrentScreen("tablet");
+      } else {
+        setCurrentScreen("mobile");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const generateProductsList = (
     category: Category,
@@ -99,6 +139,14 @@ export const MarketplaceProvider = ({
         setPriceRange,
         selectedPlatforms,
         setSelectedPlatforms,
+        isBottomNavVisible,
+        setIsBottomNavVisible,
+        lastScrollY,
+        setLastScrollY,
+        currentScreen,
+        setCurrentScreen,
+        showMobileMenu,
+        setShowMobileMenu,
       }}>
       {children}
     </MarketplaceContext.Provider>

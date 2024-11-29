@@ -29,13 +29,14 @@ const SearchAndCategory = () => {
     generateProductsList,
     setProductsList,
     priceRange,
+    isBottomNavVisible,
   } = useMarketplace();
   return (
     <div className="bg-background-2 rounded-full h-full flex items-center">
       <div
-        className={`rounded-full h-full pl-8 py-[3px] justify-center flex flex-col text-dark-gray w-[264px] ${
+        className={`rounded-full h-full pl-6 md:pl-8 py-[3px] justify-center flex flex-col text-dark-gray w-[140px] lg:w-[185px] 2xl:w-[264px] 3xl:w-[344px] ${
           isInputFocused ? "bg-background-3" : "bg-background-2"
-        }`}>
+        } ${isBottomNavVisible ? "md:w-[280px]" : "md:w-[133px]"}`}>
         <label htmlFor="search" className="text-xs font-[700]">
           {!isInputFocused && "Keyword"}
         </label>
@@ -58,9 +59,9 @@ const SearchAndCategory = () => {
         </div>
       )}
       <div
-        className={`rounded-full pl-8 h-full flex items-center gap-1 text-dark-gray w-[264px] ${
+        className={`rounded-full pl-6 md:pl-8 h-full flex items-center gap-1 text-dark-gray w-[140px] lg:w-[185px] 2xl:w-[264px] 3xl:w-[344px] ${
           isCategoryDropdownOpen ? "bg-background-3" : "bg-background-2"
-        }`}>
+        } ${isBottomNavVisible ? "md:w-[280px]" : "md:w-[133px]"}`}>
         <Popover
           open={isCategoryDropdownOpen}
           onOpenChange={(isOpen) => setIsCategoryDropdownOpen(isOpen)}>

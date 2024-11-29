@@ -22,7 +22,7 @@ const UserSection = () => {
     setIsProfileDropdownOpen,
   } = useMarketplace();
   return (
-    <div className="flex items-center gap-2 h-12">
+    <div className="flex items-center gap-6 h-12">
       <Button variant="link" size="icon" className="text-white w-max">
         List your creation
       </Button>
@@ -30,15 +30,10 @@ const UserSection = () => {
         open={isLanguageDropdownOpen}
         onOpenChange={(isOpen) => setIsLanguageDropdownOpen(isOpen)}>
         <PopoverTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`hover:bg-background-3 text-dark-secondary h-full hover:text-dark-secondary ${
-              isLanguageDropdownOpen ? "bg-background-3" : "bg-transparent"
-            }`}
-            onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}>
-            <FiGlobe className="!w-5 !h-5" />
-          </Button>
+          <FiGlobe
+            className="!w-5 !h-5 cursor-pointer"
+            onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+          />
         </PopoverTrigger>
         <PopoverContent className="w-[203px] rounded-lg p-1.5 bg-background-2">
           {languagesData.map((language, index) => (

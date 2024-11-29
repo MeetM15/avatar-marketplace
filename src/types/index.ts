@@ -83,6 +83,14 @@ export type MarketplaceContextType = {
   setPriceRange: React.Dispatch<React.SetStateAction<number[]>>;
   selectedPlatforms: PlatformType[];
   setSelectedPlatforms: React.Dispatch<React.SetStateAction<PlatformType[]>>;
+  isBottomNavVisible: boolean;
+  setIsBottomNavVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  lastScrollY: number;
+  setLastScrollY: React.Dispatch<React.SetStateAction<number>>;
+  currentScreen: ScreenSize;
+  setCurrentScreen: React.Dispatch<React.SetStateAction<ScreenSize>>;
+  showMobileMenu: boolean;
+  setShowMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // Enum for Platform Types
