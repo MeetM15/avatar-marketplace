@@ -4,7 +4,7 @@ import Marketplace from "@/components/marketplace";
 
 const Homepage = () => {
   return (
-    <div className="bg-background text-foreground min-h-screen w-full pt-20">
+    <div className="bg-background text-foreground min-h-screen w-full">
       <Marketplace />
     </div>
   );
