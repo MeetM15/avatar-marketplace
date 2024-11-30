@@ -40,7 +40,7 @@ const SearchAndCategory = () => {
         isBottomNavVisible ? "md:w-[640px]" : "md:w-[267px]"
       }`}>
       <div
-        className={`rounded-full h-full pl-6 lg:pl-8 py-[3px] justify-center flex flex-col text-dark-gray flex-1 ${
+        className={`w-1/2 rounded-full h-full pl-6 lg:pl-8 pr-6 md:pr-4 lg:pr-8 py-[3px] justify-center flex flex-col text-dark-gray ${
           isInputFocused ? "bg-background-3" : "bg-background-2"
         }`}>
         <label htmlFor="search" className="text-xs font-[700]">
@@ -57,15 +57,16 @@ const SearchAndCategory = () => {
           onBlur={() => {
             setIsInputFocused(false);
           }}
+          className="truncate"
         />
       </div>
       {!isInputFocused && !isCategoryDropdownOpen && (
-        <div className="py-1.5 h-full">
+        <div className="py-1.5 h-full mx-1">
           <Separator orientation="vertical" className="bg-light-gray" />
         </div>
       )}
       <div
-        className={`rounded-full pl-6 md:pl-4 lg:pl-8 h-full flex items-center gap-1 text-dark-gray flex-1 ${
+        className={`w-1/2 rounded-full pl-5 md:pl-4 lg:pl-8 h-full flex items-center gap-2 text-dark-gray ${
           isCategoryDropdownOpen ? "bg-background-3" : "bg-background-2"
         }`}>
         <Popover
@@ -74,13 +75,13 @@ const SearchAndCategory = () => {
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="flex-1 bg-transparent hover:bg-transparent px-0 py-[3px] h-full"
+              className="bg-transparent hover:bg-transparent px-0 py-[3px] h-full flex-1 truncate"
               onClick={() =>
                 setIsCategoryDropdownOpen(!isCategoryDropdownOpen)
               }>
-              <div className="flex flex-col text-dark-gray w-full h-full text-left">
+              <div className="flex flex-col text-dark-gray w-full h-full text-left justify-between">
                 <span className="text-xs font-[700] w-full">Category</span>
-                <span className="h-6 w-full flex items-center">
+                <span className="h-6 w-full truncate">
                   {selectedSubCategory?.name ||
                     selectedCategory?.name ||
                     defaultCategory.name}
@@ -121,7 +122,7 @@ const SearchAndCategory = () => {
                         }
                         setSelectedSubCategory(undefined);
                       }}>
-                      <span className="font-normal">{cat.value}</span>
+                      <span className="font-normal">{cat.name}</span>
                       {cat.value !== Categories.All && (
                         <ChevronRight className="!w-4 !h-4" />
                       )}
@@ -135,7 +136,9 @@ const SearchAndCategory = () => {
                     orientation={
                       currentScreen === "mobile" ? "horizontal" : "vertical"
                     }
-                    className="bg-light-gray"
+                    className={`bg-light-gray ${
+                      currentScreen === "mobile" ? "" : "h-80"
+                    }`}
                   />
                 )}
               {selectedCategory?.subcategories &&
@@ -154,7 +157,7 @@ const SearchAndCategory = () => {
                             setSelectedSubCategory(subCat);
                             setShowAllParentCategories(false);
                           }}>
-                          <span className="font-normal">{subCat.value}</span>
+                          <span className="font-normal">{subCat.name}</span>
                         </Button>
                       );
                     })}
@@ -163,10 +166,10 @@ const SearchAndCategory = () => {
             </div>
           </PopoverContent>
         </Popover>
-        <div className="p-1 w-11 h-11">
+        <div className="p-1 w-11 h-11 flex-shrink-0 flex items-center mr-1">
           <Button
             size="icon"
-            className="rounded-full bg-main-primary hover:bg-main-primary w-10 h-10"
+            className="rounded-full bg-main-primary hover:bg-main-primary w-10 h-10 flex-shrink-0"
             onClick={() => {
               const newProductsList = generateProductsList(
                 selectedCategory,
