@@ -35,11 +35,14 @@ const SearchAndCategory = () => {
     setShowAllParentCategories,
   } = useMarketplace();
   return (
-    <div className="bg-background-2 rounded-full h-full flex items-center">
+    <div
+      className={`bg-background-2 rounded-full h-full flex items-center w-[279px] xl:w-[370px] 2xl:w-[529px] 3xl:w-[689px] ${
+        isBottomNavVisible ? "md:w-[640px]" : "md:w-[267px]"
+      }`}>
       <div
-        className={`rounded-full h-full pl-6 md:pl-8 py-[3px] justify-center flex flex-col text-dark-gray w-[140px] lg:w-[185px] 2xl:w-[264px] 3xl:w-[344px] ${
+        className={`rounded-full h-full pl-6 lg:pl-8 py-[3px] justify-center flex flex-col text-dark-gray flex-1 ${
           isInputFocused ? "bg-background-3" : "bg-background-2"
-        } ${isBottomNavVisible ? "md:w-[280px]" : "md:w-[133px]"}`}>
+        }`}>
         <label htmlFor="search" className="text-xs font-[700]">
           {!isInputFocused && "Keyword"}
         </label>
@@ -62,16 +65,16 @@ const SearchAndCategory = () => {
         </div>
       )}
       <div
-        className={`rounded-full pl-6 md:pl-8 h-full flex items-center gap-1 text-dark-gray w-[140px] lg:w-[185px] 2xl:w-[264px] 3xl:w-[344px] ${
+        className={`rounded-full pl-6 md:pl-4 lg:pl-8 h-full flex items-center gap-1 text-dark-gray flex-1 ${
           isCategoryDropdownOpen ? "bg-background-3" : "bg-background-2"
-        } ${isBottomNavVisible ? "md:w-[280px]" : "md:w-[133px]"}`}>
+        }`}>
         <Popover
           open={isCategoryDropdownOpen}
           onOpenChange={(isOpen) => setIsCategoryDropdownOpen(isOpen)}>
           <PopoverTrigger asChild>
             <Button
               variant="ghost"
-              className="grow bg-transparent hover:bg-transparent px-0 py-[3px] h-full"
+              className="flex-1 bg-transparent hover:bg-transparent px-0 py-[3px] h-full"
               onClick={() =>
                 setIsCategoryDropdownOpen(!isCategoryDropdownOpen)
               }>
@@ -149,6 +152,7 @@ const SearchAndCategory = () => {
                           }`}
                           onClick={() => {
                             setSelectedSubCategory(subCat);
+                            setShowAllParentCategories(false);
                           }}>
                           <span className="font-normal">{subCat.value}</span>
                         </Button>
@@ -159,7 +163,7 @@ const SearchAndCategory = () => {
             </div>
           </PopoverContent>
         </Popover>
-        <div className="p-1">
+        <div className="p-1 w-11 h-11">
           <Button
             size="icon"
             className="rounded-full bg-main-primary hover:bg-main-primary w-10 h-10"
